@@ -1,0 +1,65 @@
+# ==========================================
+# VideoFactory - Git Ignore
+# ==========================================
+
+# --- Insumos y Salidas Multimedia ---
+insumos/
+Insumos/
+salida/
+Salida/
+salidas/
+Salidas/
+
+# --- Assets Temporales y Builds de Remotion ---
+remotion/public/*/
+remotion/node_modules/
+remotion/out/
+remotion/dist/
+remotion/.remotion/
+remotion/.claude/
+
+# --- Entorno Virtual Python y Caches ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Binarios Multimedia y Renders Sueltos ---
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.tmp
+*.temp
+*.log
+
+# --- Modelos y Caches de IA (Torch / Whisper / Rembg) ---
+.cache/
+models/
+*.pt
+*.onnx
+
+# --- Variables de Entorno y Secretos ---
+.env
+.env.local
+.env.*.local
+
+# --- Sistema Operativo e IDEs ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
