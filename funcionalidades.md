@@ -23,6 +23,8 @@ Guía completa de las capacidades, scripts, componentes de video y flujos automa
 15. [Prerenderizado Rápido en Baja Calidad (Fast Preview)](#15-prerenderizado-rápido-en-baja-calidad-fast-preview)
 16. [Generador de Animaciones Técnicas y Educativas Sincronizadas con Diálogo](#16-generador-de-animaciones-técnicas-y-educativas-sincronizadas-con-diálogo)
 17. [Unión Inteligente de Escenas con Normalización Acústica y Transiciones Sutiles](#17-unión-inteligente-de-escenas-con-normalización-acústica-y-transiciones-sutiles)
+18. [Suite de 9 Templates Verticales (9:16) de Alta Retención](#18-suite-de-9-templates-verticales-916-de-alta-retención)
+19. [Extracción de Envolvente Acústica y Formas de Onda RMS](#19-extracción-de-envolvente-acústica-y-formas-de-onda-rms)
 
 <br><br><br>
 <br><br><br>
@@ -360,6 +362,57 @@ Guía completa de las capacidades, scripts, componentes de video y flujos automa
   # 3. Unir con música de fondo atenuada automáticamente
   .\.venv\Scripts\python.exe scripts/unir_videos_balanceados.py --proyecto "2026_11_23_falta_de_contexto" --videos 1.mp4 2.mp4 3_1.mp4 --musica "insumos/musica.mp3" --volumen_musica 0.12
   ```
+
+---
+
+### 18. Suite de 9 Templates Verticales (9:16) de Alta Retención
+
+* **Archivos principales:** `remotion/src/templates/` (`01_SplitKaraoke.tsx` a `09_SmartReframe.tsx`) y componentes en `remotion/src/components/`.
+* **Propósito:** Ofrecer 9 layouts programáticos de nivel profesional optimizados para formato vertical (**1080x1920 a 30fps**) en TikTok, Instagram Reels y YouTube Shorts, maximizando la retención y el dinamismo visual.
+* **Catálogo de Templates Disponibles:**
+  1. **`Template01-SplitKaraoke`:** Pantalla dividida con imagen Ken Burns suave (55%), subtítulos karaoke palabra por palabra (15%) y cámara del presentador (30%).
+  2. **`Template02-MagnifierFocus`:** Lupa magnificadora ($1.8\times$ - $2.5\times$) sobre zona de código o documento con fondo desenfocado y webcam en píldora/cápsula vertical.
+  3. **`Template03-BentoGrid`:** Cuadrícula modular estilo Bento (1 tarjeta panorámica y 2 cuadradas) con animaciones escalonadas y video/subtítulos inferiores.
+  4. **`Template04-BeforeAfter`:** Cortina comparativa Antes vs. Después con barrido de revelación vertical y línea divisoria luminosa.
+  5. **`Template05-PresenterHUD`:** Presentador recortado con silueta transparente (WebM alfa VP9) sobre contenido a pantalla completa con subtítulos a la derecha.
+  6. **`Template06-NewsCardWaveform`:** Tarjeta pop-up de noticia o cita con fondo oscurecido y visualizador dinámico de forma de onda acústica en tiempo real.
+  7. **`Template07-VoxHighlighter`:** Estilo documental periodístico con recorte de artículo en ligera perspectiva 3D y subrayador animado en amarillo/neón guiando la lectura.
+  8. **`Template08-KineticHook`:** Tipografía cinética gigante y explosiva con alternancia de pesos y colores sobre B-Roll oscuro, ideal para los primeros 3 segundos (*Hook*).
+  9. **`Template09-SmartReframe`:** Adaptador inteligente de video horizontal `16:9` a vertical `9:16` con fondo blur inmersivo, paneo con auto-centrado, titular superior y barra de progreso.
+* **Comandos de uso:**
+  ```powershell
+  # Previsualizar en vivo en el navegador (Remotion Studio)
+  cd remotion; npm start
+
+  # Renderizar cualquier template específico a MP4
+  cd remotion
+  npx remotion render Template01-SplitKaraoke ../salida/<proyecto>/split.mp4
+  npx remotion render Template02-MagnifierFocus ../salida/<proyecto>/focus.mp4
+  npx remotion render Template03-BentoGrid ../salida/<proyecto>/bento.mp4
+  npx remotion render Template04-BeforeAfter ../salida/<proyecto>/comparativa.mp4
+  npx remotion render Template05-PresenterHUD ../salida/<proyecto>/hud.mp4
+  npx remotion render Template06-NewsCardWaveform ../salida/<proyecto>/noticia.mp4
+  npx remotion render Template07-VoxHighlighter ../salida/<proyecto>/vox.mp4
+  npx remotion render Template08-KineticHook ../salida/<proyecto>/hook.mp4
+  npx remotion render Template09-SmartReframe ../salida/<proyecto>/reframe.mp4
+  cd ..
+  ```
+
+---
+
+### 19. Extracción de Envolvente Acústica y Formas de Onda RMS
+
+* **Archivo principal:** `scripts/extraer_forma_onda.py`
+* **Propósito:** Generar arreglos de amplitud normalizada (envolvente RMS) por fotograma (a 30 fps) para alimentar visualizadores de onda en tiempo real en Remotion (como en `Template06-NewsCardWaveform`).
+* **Qué hace:**
+  * Decodifica cualquier pista de audio o video con FFmpeg a PCM 16-bit 48kHz mono.
+  * Calcula la raíz del valor cuadrático medio (RMS) por cada intervalo de fotograma.
+  * Normaliza y suaviza los valores de 0.08 a 1.0, exportando a `remotion/public/<proyecto>/waveform.json`.
+* **Comando de uso:**
+  ```powershell
+  .\.venv\Scripts\python.exe scripts/extraer_forma_onda.py --audio "insumos/<proyecto>/audio_limpio.mp3" --proyecto "<proyecto>"
+  ```
+
 
 
 
